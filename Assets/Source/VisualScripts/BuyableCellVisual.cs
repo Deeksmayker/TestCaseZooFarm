@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BuyableCellVisual : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro _priceTextMesh;
+    [SerializeField] private TextMeshProUGUI _priceTextMesh;
 
     private BuyableCell _cell;
 

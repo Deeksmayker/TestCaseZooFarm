@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider))]
 public class BuyableCell : MonoBehaviour
@@ -18,7 +19,7 @@ public class BuyableCell : MonoBehaviour
     public event Action OnEnterArea;
     public event Action OnExitArea;
     public event Action<int> OnPriceChanged;
-    public event Action OnFullPricePaid;
+    public UnityEvent OnFullPricePaid;
 
     private void Update()
     {
@@ -31,7 +32,7 @@ public class BuyableCell : MonoBehaviour
             return;
         }
 
-        SetNewPrice(Mathf.CeilToInt(Mathf.Lerp(price, 0, _t)));
+        SetNewPrice(Mathf.CeilToInt(Mathf.Lerp(price, 0, _t * _t)));
 
         _t += Time.deltaTime / spendMoneyTime;
     }
@@ -65,14 +66,14 @@ public class BuyableCell : MonoBehaviour
     {
         if (newPrice == price)
             return;
-        Debug.Log(newPrice);
+
         _moneyHandler.RemoveMoney(price - newPrice);
         price = newPrice;
         OnPriceChanged?.Invoke(price);
 
         if (price <= 0)
         {
-            OnFullPricePaid?.Invoke();
+            OnFullPricePaid.Invoke();
             Destroy(gameObject);
         }
     }

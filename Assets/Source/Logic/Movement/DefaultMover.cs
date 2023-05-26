@@ -68,7 +68,7 @@ public class DefaultMover : MonoBehaviour, IMover
             _velocity.x = horizontalVelocity.x;
             _velocity.z = horizontalVelocity.z;
         }
-        if (_velocity.x != 0 && _velocity.z != 0)
+        if (GetHorizontalSpeed() > 0.1f)
             transform.rotation = Quaternion.LookRotation(new Vector3(_velocity.x, 0, _velocity.z));
         _ch.Move(_velocity * Time.deltaTime);
     }

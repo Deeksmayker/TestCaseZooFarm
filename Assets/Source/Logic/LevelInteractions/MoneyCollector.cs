@@ -33,7 +33,7 @@ public class MoneyCollector : MonoBehaviour, ICollector
                 break;
             if (_targets[i].TryGetComponent<MoneyCollectable>(out var money) && money.CanCollect())
             {
-                money.Collect(_transform);
+                money.FlyToTargetAndDisappear(_transform);
                 OnCollected?.Invoke();
                 OnMoneyCollected?.Invoke(money.GetMoneyAmount());
             }
