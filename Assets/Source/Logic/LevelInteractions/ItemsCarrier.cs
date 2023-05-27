@@ -15,7 +15,7 @@ public class ItemsCarrier : MonoBehaviour
         var localHoldPoint = itemHoldPoint.localPosition + Vector3.up * _holdingItemsCount / 4;
 
         newItem.SetParent(transform);
-        newItem.FlyToPosAsChildren(localHoldPoint);
+        newItem.FlyToPosAsChildren(localHoldPoint, new Vector3(90, 0, 90));
         _holdingItemsCount++;
 
         _currentItems.Add(newItem);
@@ -33,7 +33,7 @@ public class ItemsCarrier : MonoBehaviour
                 continue;
 
             _currentItems[i].SetParent(target);
-            _currentItems[i].FlyToTargetAndDisappear(target);
+            _currentItems[i].FlyToTargetAndDisappear(target.position);
             _holdingItemsCount--;
             _currentItems.RemoveAt(i);
             givenCount++;

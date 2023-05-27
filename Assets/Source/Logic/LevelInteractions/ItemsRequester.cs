@@ -23,6 +23,8 @@ public class ItemsRequester : MonoBehaviour
 	}
 
 	public ItemTypes GetItemTypeRequested() => itemTypeRequested;
-	public int GetNeedItemCount() => needItemCount - _itemsCollected;
+	public int GetCurrentNeedItemCount() => needItemCount - _itemsCollected;
+	public int GetMaxItemRequested() => needItemCount;
+	public int GetCollectedCount() => _itemsCollected;
 	public bool NeedItem() => _itemsCollected < needItemCount;
 }

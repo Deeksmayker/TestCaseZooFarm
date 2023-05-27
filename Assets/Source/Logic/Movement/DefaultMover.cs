@@ -10,7 +10,8 @@ public class DefaultMover : MonoBehaviour, IMover
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckRadius;
     
-    [SerializeField] private bool alignMovementWithRotation;
+    [SerializeField] private bool alignMovementWithCamera;
+    [SerializeField] private Transform cameraTopTransform;
     
     [SerializeField] private float targetHorizontalSpeed = 15;
     [SerializeField] private float groundHorizontalAcceleration = 75;
@@ -49,10 +50,10 @@ public class DefaultMover : MonoBehaviour, IMover
         {
             var horizontalInputDirection = new Vector3(_horizontalInput.x, 0, _horizontalInput.y).normalized;
 
-            if (alignMovementWithRotation)
+            if (alignMovementWithCamera)
             {
-                horizontalInputDirection = horizontalInputDirection.x * transform.right +
-                                           horizontalInputDirection.z * transform.forward;
+                horizontalInputDirection = horizontalInputDirection.x * cameraTopTransform.right +
+                                           horizontalInputDirection.z * cameraTopTransform.forward;
             }
 
             var acceleration = IsGrounded() ? groundHorizontalAcceleration : airHorizontalAcceleration;

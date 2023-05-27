@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flyTime: 0.5
   itemType: 2
-  growTime: 1
+  growTime: 5
   grownCarrotMesh: {fileID: 4300002, guid: fbd33e75d8d4bf9479c9cb59e83a9e37, type: 3}
 --- !u!1001 &4104272586730247919
 PrefabInstance:

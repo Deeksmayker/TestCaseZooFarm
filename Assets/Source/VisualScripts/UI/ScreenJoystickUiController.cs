@@ -18,6 +18,7 @@ public class ScreenJoystickUiController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(_input.actions[InputConsts.Touch].IsInProgress());
         /*if (_input.actions[InputConsts.Touch].IsPressed())
         {
             joystickImage.SetActive(true);

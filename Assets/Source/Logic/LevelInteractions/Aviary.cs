@@ -20,7 +20,7 @@ public class Aviary : MonoBehaviour
             {
                 if (!_requestersInside[i].NeedItem())
                     continue;
-                var givenCount = carrier.GiveItemsOfTypeToTarget(_requestersInside[i].GetItemTypeRequested(), _requestersInside[i].transform, _requestersInside[i].GetNeedItemCount());
+                var givenCount = carrier.GiveItemsOfTypeToTarget(_requestersInside[i].GetItemTypeRequested(), _requestersInside[i].transform, _requestersInside[i].GetCurrentNeedItemCount());
                 for (var j = 0; j < givenCount; j++)
                     _requestersInside[i].TakeItem();
             }

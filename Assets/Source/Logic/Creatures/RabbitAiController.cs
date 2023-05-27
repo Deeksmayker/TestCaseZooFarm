@@ -28,4 +28,9 @@ public class RabbitAiController : MonoBehaviour
 
         _timer -= Time.deltaTime;
     }
+
+    public float GetCurrentSpeed()
+    {
+        return _agent.velocity.magnitude;
+    }
 }

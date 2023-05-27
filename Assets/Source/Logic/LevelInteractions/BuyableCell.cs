@@ -64,10 +64,11 @@ public class BuyableCell : MonoBehaviour
 
     private void SetNewPrice(int newPrice)
     {
-        if (newPrice == price)
+        if (newPrice == price || _moneyHandler.GetMoneyAmount() < price - newPrice)
             return;
 
         _moneyHandler.RemoveMoney(price - newPrice);
+        _moneyHandler.MoveMoneyMeshToTarget(transform.position);
         price = newPrice;
         OnPriceChanged?.Invoke(price);
 

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Seedbed : MonoBehaviour
 {
     [SerializeField] private BaseVegetable vegetablePrefab;
+    [SerializeField] private bool activated;
 
     private BaseVegetable _connectedVegetable;
 
@@ -11,29 +12,37 @@ public class Seedbed : MonoBehaviour
     {
         _connectedVegetable = GetComponentInChildren<BaseVegetable>();
 
-        if (_connectedVegetable == null)
+        if (_connectedVegetable == null && activated)
         {
-            _connectedVegetable = Instantiate(vegetablePrefab, transform);
-            _connectedVegetable.transform.localPosition = Vector3.zero;
+            SpawnVegetable();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(1);
-        if (!_connectedVegetable.CanCollect())
+        if (!activated || !_connectedVegetable.CanCollect())
             return;
         if (other.TryGetComponent<ItemsCarrier>(out var carrier))
         {
-            Debug.Log(2);
             if (!carrier.CanTakeItem())
                 return;
 
-            Debug.Log(3);
             carrier.TakeNewItem(_connectedVegetable);
 
             _connectedVegetable = Instantiate(vegetablePrefab, transform);
             _connectedVegetable.transform.localPosition = Vector3.zero;
         }
+    }
+
+    public void ActivateSeedbed()
+    {
+        activated = true;
+        SpawnVegetable();
+    }
+
+    private void SpawnVegetable()
+    {
+        _connectedVegetable = Instantiate(vegetablePrefab, transform);
+        _connectedVegetable.transform.localPosition = Vector3.zero;
     }
 }
